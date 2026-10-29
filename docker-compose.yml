@@ -1,0 +1,18 @@
+name: ledgerflow
+services:
+  mongo:
+    image: mongo:8.0
+    command: [mongod, --replSet, rs0, --bind_ip_all]
+    ports:
+      - '127.0.0.1:${MONGO_PORT:-27019}:27017'
+    volumes:
+      - mongo-data:/data/db
+      - ./docker/init-replica.js:/init-replica.js:ro
+    healthcheck:
+      test: ['CMD', 'mongosh', '--quiet', '--host', 'localhost:27017', '/init-replica.js']
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 10s
+volumes:
+  mongo-data:

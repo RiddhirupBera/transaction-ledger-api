@@ -1,0 +1,19 @@
+{
+  "name": "ledgerflow",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev:client": "npm run dev -w client",
+    "dev:server": "npm run dev -w server",
+    "build": "npm run build -w client",
+    "test": "npm test -w server",
+    "test:integration": "npm run test:integration -w server"
+  }
+}
